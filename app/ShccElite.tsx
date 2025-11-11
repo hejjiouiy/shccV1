@@ -1,8 +1,8 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Award, Users, Building, Microscope, Heart, Globe2, ChevronDown, Play, X, Sparkles, Info, ArrowUpRight } from 'lucide-react';
-import FuturisticAvatar from './FuturisticAvatar';
-import SectionAvatar from './SectionAvatar';
+// import FuturisticAvatar from '../comps/FuturisticAvatar';
+// import SectionAvatar from './SectionAvatar';
 
 interface MousePosition {
   x: number;
@@ -22,7 +22,7 @@ interface GuideState {
   };
 }
 
-export default function SHCCInteractiveGuide(): JSX.Element {
+export default function SHCCInteractiveGuide() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePos, setMousePos] = useState<MousePosition>({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState<number>(0);
@@ -192,110 +192,110 @@ export default function SHCCInteractiveGuide(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    class Node {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      radius: number;
-      pulsePhase: number;
-      color: number[];
-
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.4;
-        this.vy = (Math.random() - 0.5) * 0.4;
-        this.radius = Math.random() * 2.5 + 0.5;
-        this.pulsePhase = Math.random() * Math.PI * 2;
-        this.color = Math.random() > 0.5 ? [0, 84, 64] : [0, 150, 120];
-      }
-
-      update(): void {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.pulsePhase += 0.03;
-
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-      }
-
-      draw(): void {
-        const pulse = Math.sin(this.pulsePhase) * 0.4 + 0.6;
-        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius * pulse * 3);
-        gradient.addColorStop(0, `rgba(${this.color[0]}, ${this.color[1]}, ${this.color[2]}, ${0.6 * pulse})`);
-        gradient.addColorStop(1, 'rgba(0, 84, 64, 0)');
-        
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius * pulse * 2, 0, Math.PI * 2);
-        ctx.fill();
-      }
+  const canvas = canvasRef.current;
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  class Node {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    radius: number;
+    pulsePhase: number;
+    color: number[];
+    
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = (Math.random() - 0.5) * 0.4;
+      this.radius = Math.random() * 2.5 + 0.5;
+      this.pulsePhase = Math.random() * Math.PI * 2;
+      this.color = Math.random() > 0.5 ? [0, 84, 64] : [0, 150, 120];
     }
-
-    const nodes: Node[] = Array.from({ length: 120 }, () => new Node());
-
-    function drawConnections(): void {
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 180) {
-            const opacity = (1 - distance / 180) * 0.2;
-            const gradient = ctx.createLinearGradient(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
-            gradient.addColorStop(0, `rgba(0, 84, 64, ${opacity})`);
-            gradient.addColorStop(0.5, `rgba(0, 150, 120, ${opacity * 1.2})`);
-            gradient.addColorStop(1, `rgba(0, 84, 64, ${opacity})`);
-            
-            ctx.beginPath();
-            ctx.strokeStyle = gradient;
-            ctx.lineWidth = 1;
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.stroke();
-          }
+    
+    update(): void {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.pulsePhase += 0.03;
+      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    }
+    
+    draw(): void {
+      if (!ctx) return; // Type guard
+      const pulse = Math.sin(this.pulsePhase) * 0.4 + 0.6;
+      const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius * pulse * 3);
+      gradient.addColorStop(0, `rgba(${this.color[0]}, ${this.color[1]}, ${this.color[2]}, ${0.6 * pulse})`);
+      gradient.addColorStop(1, 'rgba(0, 84, 64, 0)');
+      
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius * pulse * 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  
+  const nodes: Node[] = Array.from({ length: 120 }, () => new Node());
+  
+  function drawConnections(): void {
+    if (!ctx) return; // Type guard
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < 180) {
+          const opacity = (1 - distance / 180) * 0.2;
+          const gradient = ctx.createLinearGradient(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+          gradient.addColorStop(0, `rgba(0, 84, 64, ${opacity})`);
+          gradient.addColorStop(0.5, `rgba(0, 150, 120, ${opacity * 1.2})`);
+          gradient.addColorStop(1, `rgba(0, 84, 64, ${opacity})`);
+          
+          ctx.beginPath();
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = 1;
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
         }
       }
     }
-
-    let animationId: number;
-    function animate(): void {
-      ctx.fillStyle = 'rgba(250, 251, 252, 0.1)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      nodes.forEach(node => {
-        node.update();
-        node.draw();
-      });
-
-      drawConnections();
-      animationId = requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    const handleResize = (): void => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  }
+  
+  let animationId: number;
+  
+  function animate(): void {
+    if (!ctx) return; // Type guard
+    ctx.fillStyle = 'rgba(250, 251, 252, 0.1)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    nodes.forEach(node => {
+      node.update();
+      node.draw();
+    });
+    drawConnections();
+    animationId = requestAnimationFrame(animate);
+  }
+  
+  animate();
+  
+  const handleResize = (): void => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  };
+  
+  window.addEventListener('resize', handleResize);
+  
+  return () => {
+    cancelAnimationFrame(animationId);
+    window.removeEventListener('resize', handleResize);
+  };
+}, []);
 
   const institutions = [
     {

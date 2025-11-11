@@ -301,7 +301,6 @@ export default function HolographicGuide({ section }: { section: SectionKey }) {
                   <button
                     onClick={() => speak(description)}
                     style={{
-                      border: 'none',
                       background: 'transparent',
                       color: '#ccfff0',
                       padding: 8,

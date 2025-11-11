@@ -3,7 +3,7 @@ import React, { useRef, Suspense, useEffect, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Sparkles, Float, Text, useGLTF, Environment, Lightformer } from '@react-three/drei'
 import * as THREE from 'three'
-import { Model as HumanModel } from './HumanModel' 
+import { Model as HumanModel } from '../comps/HumanModel' 
 
 
 /**
