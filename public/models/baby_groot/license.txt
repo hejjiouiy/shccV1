@@ -1,0 +1,11 @@
+Model Information:
+* title:	Baby Groot
+* source:	https://sketchfab.com/3d-models/baby-groot-36a1c611c5164f39a4fa7cb4faebd458
+* author:	ChrisG (https://sketchfab.com/christianguevara)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Baby Groot" (https://sketchfab.com/3d-models/baby-groot-36a1c611c5164f39a4fa7cb4faebd458) by ChrisG (https://sketchfab.com/christianguevara) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
