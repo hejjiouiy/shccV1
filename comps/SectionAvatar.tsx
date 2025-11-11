@@ -179,53 +179,7 @@ function EnhancedMedicalAvatar() {
 /**
  * 🏥 Enhanced Human Model with Medical Styling
  */
-function EnhancedHumanModel(props) {
-  const { nodes, materials } = useGLTF('/models/human.glb')
-  
-  return (
-    <group {...props} dispose={null}>
-      <group rotation={[-Math.PI / 2.2, 0, 0]} scale={2.2}>
-        {/* Enhanced material with medical aesthetic */}
-        <mesh geometry={nodes.Object_2.geometry}>
-          <meshPhysicalMaterial
-            color="#f0f8ff"
-            transparent
-            opacity={0.95}
-            transmission={0.2}
-            roughness={0.1}
-            metalness={0.05}
-            clearcoat={0.5}
-            clearcoatRoughness={0.1}
-          />
-        </mesh>
-        <mesh geometry={nodes.Object_3.geometry}>
-          <meshPhysicalMaterial
-            color="#f0f8ff"
-            transparent
-            opacity={0.95}
-            transmission={0.2}
-            roughness={0.1}
-            metalness={0.05}
-            clearcoat={0.5}
-            clearcoatRoughness={0.1}
-          />
-        </mesh>
-        <mesh geometry={nodes.Object_4.geometry}>
-          <meshPhysicalMaterial
-            color="#f0f8ff"
-            transparent
-            opacity={0.95}
-            transmission={0.2}
-            roughness={0.1}
-            metalness={0.05}
-            clearcoat={0.5}
-            clearcoatRoughness={0.1}
-          />
-        </mesh>
-      </group>
-    </group>
-  )
-}
+
 
 /**
  * 🎬 Enhanced Scene Environment

@@ -210,8 +210,8 @@ export default function SHCCInteractiveGuide() {
     color: number[];
     
     constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
+      this.x = Math.random() * canvas!.width;
+      this.y = Math.random() * canvas!.height;
       this.vx = (Math.random() - 0.5) * 0.4;
       this.vy = (Math.random() - 0.5) * 0.4;
       this.radius = Math.random() * 2.5 + 0.5;
@@ -223,8 +223,8 @@ export default function SHCCInteractiveGuide() {
       this.x += this.vx;
       this.y += this.vy;
       this.pulsePhase += 0.03;
-      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      if (this.x < 0 || this.x > canvas!.width) this.vx *= -1;
+      if (this.y < 0 || this.y > canvas!.height) this.vy *= -1;
     }
     
     draw(): void {
@@ -273,7 +273,7 @@ export default function SHCCInteractiveGuide() {
   function animate(): void {
     if (!ctx) return; // Type guard
     ctx.fillStyle = 'rgba(250, 251, 252, 0.1)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, canvas!.width, canvas!.height);
     nodes.forEach(node => {
       node.update();
       node.draw();
@@ -891,7 +891,7 @@ export default function SHCCInteractiveGuide() {
               <X size={24} />
             </button>
             <div className="w-full h-full flex items-center justify-center text-white">
-              <iframe className='w-full h-full' src="https://www.youtube.com/embed/FbBuLI_5CBE?si=IOXocWDY0kXboR7T" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              {/* <iframe className='w-full h-full' src="https://www.youtube.com/embed/FbBuLI_5CBE?si=IOXocWDY0kXboR7T" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> */}
             </div>
           </div>
         </div>
